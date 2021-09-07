@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Text.RegularExpressions;
 
 namespace assignment1ques1
 {
@@ -211,24 +211,30 @@ Note: Use of String function (Contains) and hasmap is not allowed, think of othe
         {
             try
             {
-                
-                for (int i = 0; i < SIZE; i++)
+                int tot = 0;
+                int currtot = 0;
+
+                for (int i = 0; i < accounts.Length; i++)//traverses through first dimension i.e. persons in the 2D array
                 {
-                    for (int j = 0; j < size; j++)
+                    currtot = 0;
+                    for (int j = 0; j < accounts.GetLength(i); j++)//traverses through second dimension i.e. bank accounts in the 2D array
                     {
-                        for (int x = 1; x < 40; x = x + 2)
-                        {
-                            A[i][j] = x;
-                            printf("%d\n", A[i][j]);
-                        }
+                        currtot += accounts[i,j];//Adds bank account per person in the loop
+                        
                     }
+                    if(currtot > tot)//condition which shows if current total bank account is greater than the total then enter the if block
+                    {
+                        tot = currtot;
+                    }
+                    
                 }
-                return 0;
+                return tot;
 
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                Console.WriteLine("{0} exception caught.", e);
+                return 0;
             }
         }
         /*
@@ -254,14 +260,29 @@ Constraints:
         {
             try
             {
-                // write your code here.
-                return 0;
+                int tot = 0;
+
+
+                for (int i = 0; i < stones.Length && stones.Length <= 50 && Regex.IsMatch(stones, @"^[a-zA-Z]+$"); i++)//traverses through bigger string i.e. stones and also checks for length is less than equal to 50 and all terms in stone is a letter.
+                {
+                    for (int j = 0; j < jewels.Length && jewels.Length <= 1 && Regex.IsMatch(jewels, @"^[a-zA-Z]+$"); j++)//traverses through smaller string i.e. jewels and also checks for length is greater than equal to 1 and all terms in jewels is a letter.
+                    {
+                        {
+                            if (stones[i] == jewels[j])//if jewel elements equal to stone elements then add the element in tot variable
+                            {
+                                tot += i;
+                            }
+                        }
+                    }
+                    return tot;
+                }
+                return tot;
             }
             catch (Exception e)
             {
 
                 Console.WriteLine("An error occured: " + e.Message);
-                throw;
+                return 0;
             }
 
         }
@@ -276,7 +297,7 @@ Constraints:
         Return the shuffled string.
 
         Example 3:
-        Input: s = "aiohn", indices = [3,1,4,2,0]
+        Input: s = "aiohn", indices = [3,1,4,2,0], result = [n, i, h, a, o]
         Output: "nihao"
         */
 
@@ -284,8 +305,20 @@ Constraints:
         {
             try
             {
-                // write your code here.
-                return "null";
+                if(s.Length != indices.Length)//if string input length is not equal to indices input length then return null
+                {
+                    return "null";
+                }
+                else
+                {
+                    char[] result = new char[indices.Length];//creating new character array result which equals indices input length
+                    for (int i = 0; i< s.Length; i++)//traverse through each element in string input
+                    {
+                        result[indices[i]] = s[i];//each string element will fill the result character arrays indice positions so that it displays in order.
+                    }
+                    return new string(result);
+                }
+                
             }
             catch (Exception e)
             {
@@ -321,8 +354,21 @@ nums       index     target
         {
             try
             {
+                var target_list = new List<int>(nums.Length);
+                if (nums.Length == index.Length && nums.Length >= 1 && nums.Length <= 100 && index.Length >= 1 && index.Length <= 100)
+                {
+                    for (int i = 0; i < nums.Length; i++)
+                    {
+                        if (nums[i] >= 0 && nums[i] <= 100 && index[i] >= 0 && index[i] <= i)
+                        {
+                            target_list.Insert(index[i], nums[i]);
+                        }
+                    }
+                }
+                int[] target_array = target_list.ToArray();
+                return target_array;
                 int[] target = { };
-                return ta   rget;
+                return target;
             }
             catch (Exception)
             {
