@@ -13,7 +13,7 @@ namespace assignment1ques1
             Console.WriteLine("Q1 : Enter the string:");
             string s = Console.ReadLine();
             bool pos = HalvesAreAlike(s);
-            if (pos.Equals("true"))//This provides the condition that if the method returns true it will enter the if block
+            if (pos)//This provides the condition that if the method returns true it will enter the if block
             {
                 Console.WriteLine("Both Halfs of the string are alike");
             }
@@ -58,7 +58,7 @@ namespace assignment1ques1
             String word2 = "aiohn";
             int[] indices = { 3, 1, 4, 2, 0 };
             String rotated_string = RestoreString(word2, indices);
-            Console.WriteLine("The Final string after rotation is", rotated_string);
+            Console.WriteLine("The Final string after rotation is"+ " " + rotated_string);
 
 
             //Quesiton 6:
@@ -70,6 +70,7 @@ namespace assignment1ques1
             for (int i = 0; i < target.Length; i++)
             {
                 Console.Write(target[i] + "\t");
+
             }
             Console.WriteLine();
 
@@ -97,19 +98,19 @@ Explanation: a = "bo" and b = "ok". a has 1 vowel and b has 1 vowel. Therefore, 
                 String[] parts = { s.Substring(0, mid), s.Substring(mid) };//provides two parts of the string in the string array
                   foreach (char i in parts[0])//Placing a for each loop to count number of characters in the first half of the word
                 {
-                    if (i.Equals("a") || i.Equals("e") || i.Equals("i") || i.Equals("o") || i.Equals("u") || i.Equals("A") || i.Equals("E") || i.Equals("I") || i.Equals("O") || i.Equals("U")) //if character equals a vowel then we count the vowel
+                    if (i.Equals('a') || i.Equals('e') || i.Equals('i') || i.Equals('o') || i.Equals('u') || i.Equals('A') || i.Equals('E') || i.Equals('I') || i.Equals('O') || i.Equals('U')) //if character equals a vowel then we count the vowel
                     {
                         vcounter1++;
                     }
                 }
                 foreach (char i in parts[1])//Placing a for each loop to count number of characters in the second half of the word
                 {
-                    if (i.Equals("a") || i.Equals("e") || i.Equals("i") || i.Equals("o") || i.Equals("u") || i.Equals("A") || i.Equals("E") || i.Equals("I") || i.Equals("O") || i.Equals("U"))//if character equals a vowel then we count the vowel
+                    if (i.Equals('a') || i.Equals('e') || i.Equals('i') || i.Equals('o') || i.Equals('u') || i.Equals('A') || i.Equals('E') || i.Equals('I') || i.Equals('O') || i.Equals('U'))//if character equals a vowel then we count the vowel
                     {
                         vcounter2++;
                     }
                 }
-                if (vcounter1 == vcounter2)
+                if (vcounter1 == vcounter2)//the counters are equal then return true
                 {
                     return true;
                 }
@@ -154,25 +155,23 @@ Note: Use of String function (Contains) and hasmap is not allowed, think of othe
                 {
                     // If uppercase character, subtract 'A'
                     // to find index.
-                    if ('A' <= s[i] && s[i] <= 'Z')
+                    if ('A' <= s[i] && s[i] <= 'Z')//we check whether the element in s belongs to A to Z of the alphabet
                         ind = s[i] - 'A';
 
                     // If lowercase character,
                     // subtract 'a' to find
                     // index.
-                    else if ('a' <= s[i] && s[i] <= 'z')
+                    else if ('a' <= s[i] && s[i] <= 'z')//we check whether the element in s belongs to a to z of the alphabet
                         ind = s[i] - 'a';
 
-                    // If this character is other than english
-                    // lowercase and uppercase characters.
+                    // If this character is other than english lowercase and uppercase characters.
                     else
                         continue;
 
                     sentence[ind] = true;
                 }
 
-                // Return false if any
-                // character is unmarked
+                // Return false if any character is unmarked
                 for (int i = 0; i <= 25; i++)
                 {
                     if (sentence[i] == false)
@@ -214,10 +213,10 @@ Note: Use of String function (Contains) and hasmap is not allowed, think of othe
                 int tot = 0;
                 int currtot = 0;
 
-                for (int i = 0; i < accounts.Length; i++)//traverses through first dimension i.e. persons in the 2D array
+                for (int i = 0; i < accounts.GetLength(0); i++)//traverses through first dimension i.e. persons in the 2D array
                 {
                     currtot = 0;
-                    for (int j = 0; j < accounts.GetLength(i); j++)//traverses through second dimension i.e. bank accounts in the 2D array
+                    for (int j = 0; j < accounts.GetLength(1); j++)//traverses through second dimension i.e. bank accounts in the 2D array
                     {
                         currtot += accounts[i,j];//Adds bank account per person in the loop
                         
@@ -265,16 +264,16 @@ Constraints:
 
                 for (int i = 0; i < stones.Length && stones.Length <= 50 && Regex.IsMatch(stones, @"^[a-zA-Z]+$"); i++)//traverses through bigger string i.e. stones and also checks for length is less than equal to 50 and all terms in stone is a letter.
                 {
-                    for (int j = 0; j < jewels.Length && jewels.Length <= 1 && Regex.IsMatch(jewels, @"^[a-zA-Z]+$"); j++)//traverses through smaller string i.e. jewels and also checks for length is greater than equal to 1 and all terms in jewels is a letter.
+                    for (int j = 0; j < jewels.Length && jewels.Length >= 1 && Regex.IsMatch(jewels, @"^[a-zA-Z]+$"); j++)//traverses through smaller string i.e. jewels and also checks for length is greater than equal to 1 and all terms in jewels is a letter.
                     {
-                        {
+                        
                             if (stones[i] == jewels[j])//if jewel elements equal to stone elements then add the element in tot variable
                             {
                                 tot += i;
                             }
                         }
-                    }
-                    return tot;
+                    
+                    
                 }
                 return tot;
             }
@@ -316,7 +315,7 @@ Constraints:
                     {
                         result[indices[i]] = s[i];//each string element will fill the result character arrays indice positions so that it displays in order.
                     }
-                    return new string(result);
+                    return new String(result);
                 }
                 
             }
@@ -354,25 +353,24 @@ nums       index     target
         {
             try
             {
-                var target_list = new List<int>(nums.Length);
-                if (nums.Length == index.Length && nums.Length >= 1 && nums.Length <= 100 && index.Length >= 1 && index.Length <= 100)
+                var target = new List<int>(nums.Length); // taking list as target and keeping the length equivalent
+                if (nums.Length == index.Length && nums.Length >= 1 && nums.Length <= 100 && index.Length >= 1 && index.Length <= 100)// we have num length equivalent to index length and num length is greater than equal to 1 and less than equal to 100 and index length is greater than equal to 1 and less than equal to 100
                 {
-                    for (int i = 0; i < nums.Length; i++)
+                    for (int i = 0; i < nums.Length; i++) //traversing through till num length
                     {
-                        if (nums[i] >= 0 && nums[i] <= 100 && index[i] >= 0 && index[i] <= i)
+                        if (nums[i] >= 0 && nums[i] <= 100 && index[i] >= 0 && index[i] <= i) //traversing through num array which is greater than equal to 0 and less than equal to 100 and index array is less than equal to i element
                         {
-                            target_list.Insert(index[i], nums[i]);
+                            target.Insert(index[i], nums[i]); // this inserts the values of index and num to target. 
                         }
                     }
                 }
-                int[] target_array = target_list.ToArray();
-                return target_array;
-                int[] target = { };
-                return target;
+                int[] target_val = target.ToArray();//Convert target to array and insert it to target_val int array
+                return target_val;//returns target_val to main
+                
             }
-            catch (Exception)
+            catch (Exception e)
             {
-
+                Console.WriteLine(e.Message);
                 throw;
             }
 
